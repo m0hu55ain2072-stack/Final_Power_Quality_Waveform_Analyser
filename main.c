@@ -20,9 +20,14 @@ int main(int argc, char *argv[]) {
     const char *phase_names[] = { "A", "B", "C" };
     for (int phase = 0; phase < 3; phase++) {
         double rms = compute_rms(samples, count, phase);
-        printf("Phase %s RMS: %.2f V\n", phase_names[phase], rms);
-}
+        double pp  = compute_peak_to_peak(samples, count, phase);
+        double dc  = compute_dc_offset(samples, count, phase);
 
+        printf("\nPhase %s:\n", phase_names[phase]);
+        printf("  RMS:          %.2f V\n", rms);
+        printf("  Peak-to-peak:   %.2f V\n", pp);
+        printf("  DC offset:      %.4f V\n", dc);
+}
  free(samples);
     return 0;
 }
