@@ -15,8 +15,14 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    printf("Loaded %d samples from %s\n", count, argv[1]);
+    printf("Loaded %d samples from %s\n\n", count, argv[1]);
 
-    free(samples);
+    const char *phase_names[] = { "A", "B", "C" };
+    for (int phase = 0; phase < 3; phase++) {
+        double rms = compute_rms(samples, count, phase);
+        printf("Phase %s RMS: %.2f V\n", phase_names[phase], rms);
+}
+
+ free(samples);
     return 0;
 }
