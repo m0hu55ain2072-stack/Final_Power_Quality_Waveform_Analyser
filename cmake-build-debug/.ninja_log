@@ -1,0 +1,6 @@
+# ninja log v6
+2	70	8000390694540642	CMakeFiles/untitled1.dir/main.c.obj	79374ce34a776deb
+9	75	8000390694601523	CMakeFiles/untitled1.dir/Waveform.c.obj	49fbc51a5a510742
+2	75	8000398103601271	CMakeFiles/Final_Power_Quality_Waveform_Analyser.dir/main.c.obj	7dda0b6e82fb1e73
+10	83	8000398103679373	CMakeFiles/Final_Power_Quality_Waveform_Analyser.dir/Waveform.c.obj	2d3c8542e039bdc
+17	83	8000398103750355	CMakeFiles/Final_Power_Quality_Waveform_Analyser.dir/io.c.obj	be4928cf5cd564d7

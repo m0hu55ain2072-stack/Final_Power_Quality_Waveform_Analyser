@@ -1,0 +1,3 @@
+C:/Users/Monzo/Documents/GitHub/Final_Power_Quality_Waveform_Analyser/cmake-build-debug/CMakeFiles/Final_Power_Quality_Waveform_Analyser.dir
+C:/Users/Monzo/Documents/GitHub/Final_Power_Quality_Waveform_Analyser/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Monzo/Documents/GitHub/Final_Power_Quality_Waveform_Analyser/cmake-build-debug/CMakeFiles/rebuild_cache.dir
