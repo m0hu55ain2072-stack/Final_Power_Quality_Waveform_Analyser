@@ -1,6 +1,7 @@
 #include <math.h>
 #include "waveform.h"
 
+// Helper: pick the voltage for the requested phase
 static double get_voltage(const WaveformSample *s, int phase) {
     if (phase == 0) return s->phase_A_voltage;
     if (phase == 1) return s->phase_B_voltage;

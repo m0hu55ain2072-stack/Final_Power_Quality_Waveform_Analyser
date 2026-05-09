@@ -12,30 +12,36 @@ WaveformSample *load_csv(const char *filename, int *row_count) {
 
     char line[1000];
 
-
+    // First pass: count rows
     int line_count = 0;
     while (fgets(line, sizeof(line), fp) != NULL) {
         line_count++;
     }
-    int data_rows = line_count - 1;
+    int data_rows = line_count - 1;  // minus header
 
+    //  Reset the file pointer to the start so we can read again.
     rewind(fp);
 
-
+    // Allocate exactly the space we need for the data rows
     WaveformSample *samples = malloc(data_rows * sizeof(WaveformSample));
     if (samples == NULL) {
         fclose(fp);
         return NULL;
     }
 
-
+    // Skip header
     fgets(line, sizeof(line), fp);
 
-
-    WaveformSample *out = samples;
+    // Second pass: read each row
+    //  parse each row using pointer arithmetic.
+    //  `out` walks through the allocated array; `out++` advances by one
+    //  struct (sizeof(WaveformSample) bytes) each iteration. */
+    WaveformSample *out = samples;// walking pointer
     for (int i = 0; i < data_rows; i++) {
-
         if (fgets(line, sizeof(line), fp) != NULL) {
+
+            //  sscanf returns the number of fields successfully parsed.
+            //  We expect exactly 8; anything else indicates malformed input.
             int fields = sscanf(line, "%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf",
                         &out->timestamp,
                         &out->phase_A_voltage,
@@ -54,9 +60,10 @@ WaveformSample *load_csv(const char *filename, int *row_count) {
         }
 
 
-        out++;
+        out++;  // pointer arithmetic — advance to next struct
     }
 
+    //  Communicate the count back to the caller and clean up.
     *row_count = data_rows;
     fclose(fp);
     return samples;
@@ -69,6 +76,8 @@ void write_results(const char *filename, WaveformSample *samples, int row_count)
         return;
     }
     const char *phase_names[] = { "A", "B", "C" };
+
+    // Report header.
     fprintf(fp, "Power Quality Analysis Report\n");
     fprintf(fp, "===============================\n");
     fprintf(fp, "Loaded %d samples\n", row_count);

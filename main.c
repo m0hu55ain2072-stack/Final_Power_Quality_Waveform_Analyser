@@ -4,11 +4,13 @@
 #include "io.h"
 
 int main(int argc, char *argv[]) {
+// Validate that the user supplied exactly one argument: the CSV path
     if (argc != 2) {
         fprintf(stderr, "Usage: %s <csv_filename>\n", argv[0]);
         return 1;
     }
-
+    // Load the CSV into a dynamically-allocated array.
+    // load_csv handles all error reporting; we just check for NULL.
     int count = 0;
     WaveformSample *samples = load_csv(argv[1], &count);
     if (samples == NULL) {
@@ -17,6 +19,7 @@ int main(int argc, char *argv[]) {
 
     printf("Loaded %d samples from %s\n\n", count, argv[1]);
 
+    //  Print the metrics for each phase to the screen
     const char *phase_names[] = { "A", "B", "C" };
     for (int phase = 0; phase < 3; phase++) {
         double rms = compute_rms(samples, count, phase);
@@ -31,7 +34,7 @@ int main(int argc, char *argv[]) {
         printf("  DC offset:      %.4f V\n", dc);
         printf("  Clipped samples: %d\n\n", clipped);
 }
-
+  // Save the same results to a file.
 write_results("Results.txt", samples, count);
     printf("\nReport written to Results.txt\n");
 
