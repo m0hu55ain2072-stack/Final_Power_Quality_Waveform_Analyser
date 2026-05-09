@@ -31,6 +31,10 @@ int main(int argc, char *argv[]) {
         printf("  DC offset:      %.4f V\n", dc);
         printf("  Clipped samples: %d\n\n", clipped);
 }
+
+write_results("Results.txt", samples, count);
+    printf("\nReport written to Results.txt\n");
+
  free(samples);
     return 0;
 }

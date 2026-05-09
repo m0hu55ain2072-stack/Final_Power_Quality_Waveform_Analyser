@@ -62,4 +62,32 @@ WaveformSample *load_csv(const char *filename, int *row_count) {
     return samples;
 }
 
+void write_results(const char *filename, WaveformSample *samples, int row_count) {
+    FILE *fp = fopen(filename, "w");
+    if (fp == NULL) {
+        fprintf(stderr, "Error: could not open '%s' for writing\n", filename);
+        return;
+    }
+    const char *phase_names[] = { "A", "B", "C" };
+    fprintf(fp, "Power Quality Analysis Report\n");
+    fprintf(fp, "===============================\n");
+    fprintf(fp, "Loaded %d samples\n", row_count);
+    for (int phase = 0; phase < 3; phase++) {
+        double rms     = compute_rms(samples, row_count, phase);
+        double pp      = compute_peak_to_peak(samples, row_count, phase);
+        double dc      = compute_dc_offset(samples, row_count, phase);
+        int    clipped = count_clipped_samples(samples, row_count, phase);
+        int    in_tol  = is_within_tolerance(rms);
+
+        fprintf(fp, "Phase %s\n", phase_names[phase]);
+        fprintf(fp, "-------\n");
+        fprintf(fp, "  RMS voltage:     %8.2f V   [%s]\n", rms, in_tol ? "WITHIN TOLERANCE" : "OUT OF TOLERANCE");
+        fprintf(fp, "  Peak-to-peak:    %8.2f V\n", pp);
+        fprintf(fp, "  DC offset:       %8.4f V\n", dc);
+        fprintf(fp, "  Clipped samples: %d\n", clipped);
+        fprintf(fp, "\n");
+    }
+    fclose(fp);
+}
+
 
