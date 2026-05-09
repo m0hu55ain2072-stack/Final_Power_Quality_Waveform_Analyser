@@ -36,3 +36,18 @@ double compute_dc_offset(const WaveformSample *samples, int count, int phase) {
     }
     return sum / count;
 }
+
+// Count samples where |voltage| >= 324.9 V (sensor clipping threshold)
+int count_clipped_samples(const WaveformSample *samples, int count, int phase) {
+    int clipped = 0;
+    for (const WaveformSample *p = samples; p < samples + count; p++) {
+        double v = get_voltage(p, phase);
+        if (fabs(v) >= 324.9) clipped++;
+    }
+    return clipped;
+}
+
+// Tolerance: 230 V ±10% means 207.0 to 253.0 V
+int is_within_tolerance(double rms) {
+    return (rms >= 207.0 && rms <= 253.0) ? 1 : 0;
+}

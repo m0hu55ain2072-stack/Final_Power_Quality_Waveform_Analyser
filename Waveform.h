@@ -15,4 +15,6 @@ typedef struct {
 double compute_rms(const WaveformSample *samples, int count, int phase);
 double compute_peak_to_peak(const WaveformSample *samples, int count, int phase);
 double compute_dc_offset(const WaveformSample *samples, int count, int phase);
+int count_clipped_samples(const WaveformSample *samples, int count, int phase);
+int is_within_tolerance(double rms);
 #endif

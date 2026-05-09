@@ -22,11 +22,14 @@ int main(int argc, char *argv[]) {
         double rms = compute_rms(samples, count, phase);
         double pp  = compute_peak_to_peak(samples, count, phase);
         double dc  = compute_dc_offset(samples, count, phase);
+        int clipped = count_clipped_samples(samples, count, phase);
+        int in_tol  = is_within_tolerance(rms);
 
         printf("\nPhase %s:\n", phase_names[phase]);
-        printf("  RMS:          %.2f V\n", rms);
+        printf("  RMS voltage:    %.2f V  [%s]\n", rms, in_tol ?  "WITHIN TOLERANCE" : "OUT OF TOLERANCE");
         printf("  Peak-to-peak:   %.2f V\n", pp);
         printf("  DC offset:      %.4f V\n", dc);
+        printf("  Clipped samples: %d\n\n", clipped);
 }
  free(samples);
     return 0;
