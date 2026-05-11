@@ -45,3 +45,7 @@
 117	251	8000542360436203	Final_Power_Quality_Waveform_Analyser.exe	e436367021e17e0a
 4	105	8000545653646465	CMakeFiles/Final_Power_Quality_Waveform_Analyser.dir/main.c.obj	7dda0b6e82fb1e73
 105	233	8000545654656929	Final_Power_Quality_Waveform_Analyser.exe	e436367021e17e0a
+211	944	8001544916527620	CMakeFiles/Final_Power_Quality_Waveform_Analyser.dir/Waveform.c.obj	2d3c8542e039bdc
+218	946	8001544916599078	CMakeFiles/Final_Power_Quality_Waveform_Analyser.dir/io.c.obj	be4928cf5cd564d7
+7	946	8001544914483746	CMakeFiles/Final_Power_Quality_Waveform_Analyser.dir/main.c.obj	7dda0b6e82fb1e73
+946	1400	8001544923876994	Final_Power_Quality_Waveform_Analyser.exe	e436367021e17e0a
